@@ -25,6 +25,10 @@ message PeopleInfo{
     }
     repeated Phone phone_numbers=3;//phone_numbers 字段，表⽰⼀个联系⼈有多个号码，可将其设置为 repeated，写法如下
     google.protobuf.Any data=4; 
+    oneof other_contact{
+        string QQ=5;
+        string WeChat=6;
+    }
 }
 
 // 通讯录

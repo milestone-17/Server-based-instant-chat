@@ -60,7 +60,23 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
         _address.set_unit_address(ar);
 
         people->mutable_data()->PackFrom(_address);//PackFrom 类型转换
-
+        cout<<" 请选择其他联系方式      (1->QQ   2->WeChat)   :";
+        int other_contact;
+        cin>>other_contact;
+          cin.ignore(256, '\n');
+        if(other_contact==1){
+            cout<<"请输入QQ号:";
+            std::string QQ;
+            getline(cin,QQ);
+            people->set_qq(QQ);
+        }else if(other_contact==2){
+            cout<<"请输入WeChat号:";
+            std::string WeChat;
+            getline(cin,WeChat);
+            people->set_wechat(WeChat);
+        }else{
+            cout<<"未输入更多联系方式"<<endl;
+        }
     }
     cout << "-----------添加联系⼈成功-----------" << endl;
 }

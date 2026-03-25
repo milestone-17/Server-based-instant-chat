@@ -34,6 +34,19 @@ void PrintContacts(Contacts&contacts){
      else{
         cout<<"未设置地址"<<endl;
      }
+    //  if(contact._internal_has_qq())
+    //  else if(wechat)
+    auto other_contact=contact.other_contact_case();
+    switch(other_contact){
+        case contacts2::PeopleInfo::OtherContactCase::kQQ:
+            cout<<"QQ号为"<<contact.qq()<<endl;
+            break;
+        case contacts2::PeopleInfo::OtherContactCase::kWeChat:
+        cout<<"WECHAT 为"<<contact.wechat()<<endl;
+        break;
+        default:
+        break;
+    }
     }
     cout<<"打印完成"<<endl;
 }
