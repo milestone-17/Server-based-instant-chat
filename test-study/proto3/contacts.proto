@@ -12,6 +12,11 @@ message PeopleInfo{
     int32 age=2;//年龄,字符标号不能一样
     message Phone{
         string number=1;// 嵌套的字符可与外层一样
+        enum PhoneType{
+            MP=0;//固定电话
+            TEL=1;//固定电话
+        }
+        PhoneType type =2;
     }
 
    

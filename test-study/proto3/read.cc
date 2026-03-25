@@ -4,21 +4,31 @@
 using namespace std;
 using namespace contacts2;
 
+string PhoneTypeToString(PeopleInfo::Phone::PhoneType type) {
+    switch(type) {
+        case PeopleInfo::Phone::MP: return "MP";
+        case PeopleInfo::Phone::TEL: return "TEL";
+        default: return "UNKNOWN";
+    }
+}
+
 void PrintContacts(Contacts&contacts){
     //数组
     cout<<"打印通讯录"<<endl;
     for(int i=0;i<contacts.contacts_size();++i){
       auto contact= contacts.contacts(i);
-      cout<<"第"<<i<<"位联系人"<<endl;
-      cout<<"name:"<<contact.name();
-      cout<<"age:"<<contact.age();
+      cout<<"第"<<i+1<<"位联系人"<<endl;
+      cout<<"name:"<<contact.name()<<endl;
+      cout<<"age:"<<contact.age()<<endl;
+      //电话:1111111(MP/TEL )
       for(int i=0;i<contact.phone_numbers_size();++i){
         auto phone=contact.phone_numbers(i);
-        cout<<"phone "<<i<<":"<<phone.number()<<endl;
+        cout<<"phone "<<i<<":"<<phone.number()<<"        ("<<PhoneTypeToString(phone.type())<<")"<<endl;
       }
     }
     cout<<"打印完成"<<endl;
 }
+
 int main(){
   fstream input("contacts.bin",ios::in|ios::binary);//二进制.binary:不做任何转换,,in --只读打开文件 input
     if(!input){
@@ -36,7 +46,6 @@ int main(){
     PrintContacts(contacts);
     input.close();
 }
-
 
 //命令行读取
 //protoc --decode=contacts2.Contacts ./contacts.proto < ./contacts.b

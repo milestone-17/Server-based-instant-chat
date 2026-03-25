@@ -19,7 +19,9 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
     cin.ignore(256, '\n');
     //电话
     for(int i=1;;++i){
-        cout<<"请输入联系人电话"<<i+1<<"(按回车为输入完成):";
+      
+    
+        cout<<"请输入联系人电话"<<i<<"(按回车为输入完成):";
         string number;
         getline(cin,number);
         if(number.empty()){
@@ -29,6 +31,24 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
         //先新增一个电话,再对number设置
         auto phone=people->add_phone_numbers();
         phone->set_number(number);
+          cout<<"请确定电话类型 (MP:1, TEL=2),输入:";
+        int type;
+        cin>>type;
+        cin.ignore(256, '\n');
+        switch(type){
+            case 1:
+             phone->set_type(::contacts2::PeopleInfo_Phone_PhoneType::PeopleInfo_Phone_PhoneType_MP);
+             break;
+            case 2: 
+            phone->set_type(::contacts2::PeopleInfo_Phone_PhoneType::PeopleInfo_Phone_PhoneType_TEL);
+            break;
+            default:
+                cout<<"选择错误,使用默认值MP"<<endl;
+                //没有设置,系统会有默认值,即常量值为0的常量0
+                //  phone->set_type(::contacts2::PeopleInfo_Phone_PhoneType_MP);
+                break;
+        }
+
     }
     cout << "-----------添加联系⼈成功-----------" << endl;
 }
