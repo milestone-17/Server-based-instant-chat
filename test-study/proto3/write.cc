@@ -1,6 +1,7 @@
 #include <iostream>
 #include"contacts.pb.h"
 #include<fstream>
+#include <string>
 using namespace std;
 using namespace contacts2;
 
@@ -18,10 +19,10 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
     people->set_age(age);
     cin.ignore(256, '\n');
     //电话
-    for(int i=1;;++i){
+    for(int phone_idx=1;;++phone_idx){
       
 
-        cout<<"请输入联系人电话"<<i<<"(按回车为输入完成):";
+        cout<<"请输入联系人电话"<<phone_idx<<"(按回车为输入完成):";
         string number;
         getline(cin,number);
         if(number.empty()){
@@ -77,6 +78,22 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
         }else{
             cout<<"未输入更多联系方式"<<endl;
         }
+        
+        }
+        cout<<"请设置备注信息: "<<endl;
+        for(int i=1;;++i){
+            cout<<"备注信息"<<i<<":(按回车完成所有备注):"<<endl;;
+            string remark_key;
+            getline(cin,remark_key);
+            if(remark_key.empty()){
+                cout<<"备注输入完成"<<endl;
+                break;
+            }
+            string remark_value;
+            cout<<"设置备注内容"<<i<<endl;
+            getline(cin,remark_value);
+
+            (*people->mutable_remark())[remark_key] = remark_value;
     }
     cout << "-----------添加联系⼈成功-----------" << endl;
 }

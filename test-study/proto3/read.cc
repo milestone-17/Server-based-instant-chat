@@ -47,6 +47,13 @@ void PrintContacts(Contacts&contacts){
         default:
         break;
     }
+    if(contact.remark_size()){
+        cout<<"备注信息"<<endl;
+    }
+        for(auto it=contact.remark().cbegin();it!=contact.remark().cend();it++)//c---const
+        {
+            cout<<"        "<<it->first<<":"<<it->second<<endl;
+        }
     }
     cout<<"打印完成"<<endl;
 }

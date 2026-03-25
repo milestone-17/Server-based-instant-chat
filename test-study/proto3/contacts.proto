@@ -29,6 +29,7 @@ message PeopleInfo{
         string QQ=5;
         string WeChat=6;
     }
+    map<string,string> remark=7;
 }
 
 // 通讯录
