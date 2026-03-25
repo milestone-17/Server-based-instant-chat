@@ -4,31 +4,39 @@
 using namespace std;
 using namespace contacts2;
 
-string PhoneTypeToString(PeopleInfo::Phone::PhoneType type) {
-    switch(type) {
-        case PeopleInfo::Phone::MP: return "MP";
-        case PeopleInfo::Phone::TEL: return "TEL";
-        default: return "UNKNOWN";
-    }
-}
-
 void PrintContacts(Contacts&contacts){
     //数组
     cout<<"打印通讯录"<<endl;
     for(int i=0;i<contacts.contacts_size();++i){
       auto contact= contacts.contacts(i);
-      cout<<"第"<<i+1<<"位联系人"<<endl;
+      cout<<"---------第"<<i+1<<"位联系人----------"<<endl;
       cout<<"name:"<<contact.name()<<endl;
       cout<<"age:"<<contact.age()<<endl;
       //电话:1111111(MP/TEL )
       for(int i=0;i<contact.phone_numbers_size();++i){
         auto phone=contact.phone_numbers(i);
-        cout<<"phone "<<i<<":"<<phone.number()<<"        ("<<PhoneTypeToString(phone.type())<<")"<<endl;
+        cout<<"phone "<<i<<":"<<phone.number()<<"        "<<"("<< phone.type()<<")"<<endl;
       }
+      //打印地址
+
+      //Is<contacts2::AddRess>()含义：模板类型判断函数作用：检查当前数据的实际类型，是不是 contacts2::AddRess 这个自定义类型
+     if(contact.has_data()&&contact.data().Is<contacts2::AddRess>()){
+            contacts2::AddRess address;
+            contact.data().UnpackTo(&address);
+            if(!address.home_address().empty()){
+                cout<<"家庭地址:"<<address.home_address()<<endl;
+
+            }
+            if(!address.unit_address().empty()){
+                cout<<"单位地址"<<address.unit_address()<<endl;
+            }
+     }
+     else{
+        cout<<"未设置地址"<<endl;
+     }
     }
     cout<<"打印完成"<<endl;
 }
-
 int main(){
   fstream input("contacts.bin",ios::in|ios::binary);//二进制.binary:不做任何转换,,in --只读打开文件 input
     if(!input){

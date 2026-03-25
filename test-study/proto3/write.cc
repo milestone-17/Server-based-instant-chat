@@ -20,7 +20,7 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
     //电话
     for(int i=1;;++i){
       
-    
+
         cout<<"请输入联系人电话"<<i<<"(按回车为输入完成):";
         string number;
         getline(cin,number);
@@ -48,6 +48,18 @@ void AddPeopleInfo(contacts2::PeopleInfo* people){
                 //  phone->set_type(::contacts2::PeopleInfo_Phone_PhoneType_MP);
                 break;
         }
+        //往any变量的data设置,但因为是定义任何类型的,设置前,我们先设置一个message
+        std::string address;
+        contacts2::AddRess _address;
+        cout<<"请输入联系人家庭地址 :";
+        getline(cin,address);
+        _address.set_home_address(address);
+        cout<<"请输入联系人单位地址: ";
+        string ar;
+        getline(cin,ar);
+        _address.set_unit_address(ar);
+
+        people->mutable_data()->PackFrom(_address);//PackFrom 类型转换
 
     }
     cout << "-----------添加联系⼈成功-----------" << endl;

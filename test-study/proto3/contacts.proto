@@ -3,8 +3,13 @@ syntax = "proto3";
 //可写,可不写,命名空间,与namespace差不多
 package contacts2;
 
+import "google/protobuf/any.proto";
 //message可嵌套.也可不嵌套
 
+message AddRess{
+    string home_address=1;
+    string unit_address=2;
+}
 message PeopleInfo{
     //字段编号不能一样
     //字段编号不能从0开始
@@ -18,9 +23,8 @@ message PeopleInfo{
         }
         PhoneType type =2;
     }
-
-   
     repeated Phone phone_numbers=3;//phone_numbers 字段，表⽰⼀个联系⼈有多个号码，可将其设置为 repeated，写法如下
+    google.protobuf.Any data=4; 
 }
 
 // 通讯录
