@@ -1,0 +1,24 @@
+//首行 ,指定版本语法
+syntax = "proto3";
+//可写,可不写,命名空间,与namespace差不多
+package contacts2;
+
+//message可嵌套.也可不嵌套
+
+message PeopleInfo{
+    //字段编号不能一样
+    //字段编号不能从0开始
+    string name=1;//姓名,标识字段编号
+    int32 age=2;//年龄,字符标号不能一样
+    message Phone{
+        string number=1;// 嵌套的字符可与外层一样
+    }
+
+   
+    repeated Phone phone_numbers=3;//phone_numbers 字段，表⽰⼀个联系⼈有多个号码，可将其设置为 repeated，写法如下
+}
+
+// 通讯录
+message Contacts {
+ repeated PeopleInfo contacts = 1;
+}
