@@ -1,0 +1,5 @@
+syntax ="proto3";
+package find_contact_req;
+message FindContactRep{
+    string uid=1;
+}

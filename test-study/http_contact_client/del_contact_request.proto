@@ -1,0 +1,5 @@
+syntax="proto3";
+package del_contact_req;
+message DelContackRep{
+    string uid=1;//联系人id
+}

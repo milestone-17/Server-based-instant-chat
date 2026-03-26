@@ -1,0 +1,7 @@
+syntax="proto3";
+package base_response;
+
+message BaseResponse{
+    bool success=1;// 返回结果
+    string errmsg=2;//错误描述
+}
